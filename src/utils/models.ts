@@ -36,7 +36,43 @@ const shipmentSchema = new Schema({
     },
   ],
 });
+// "data": {
+//   "shipment_number": "12345",
+//   "flight_number": "em-789",
+//   "flight_path": "Ahmedabad - Emirates - Dubai",
+//   "departure": "1754043211",
+//   "arrival": "1754007211",
+//   “status”: ‘in-transit’ // default status.
+// }
 
+const flightSchema = new Schema({
+  shipment_number: {
+    type: Number,
+    required: true,
+  },
+  flight_number: {
+    type: String,
+    required: true,
+  },
+  flight_path: {
+    type: String,
+    required: true,
+  },
+  departure: {
+    type: Date,
+    required: true,
+  },
+  arrival: {
+    type: Date,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "in-transit",
+    required: false,
+  },
+});
 // Export the model with proper typing
 export const User = mongoose.model<IUser>("User", userSchema);
 export const Shipment = mongoose.model("Shipment", shipmentSchema);
+export const Flight = mongoose.model("Flight", flightSchema);
