@@ -54,6 +54,7 @@ router.post(
     try {
       const shipmentData = shipmentSchema.parse(body);
       const shipmentRecord = await Shipment.findOne({ shipment_number });
+      console.log(shipmentRecord);
       if (!shipmentRecord) {
         return res.status(404).json({
           success: false,
