@@ -148,6 +148,7 @@ router.post(
         departure: new Date(Number(flightData.departure)),
         arrival: new Date(Number(flightData.arrival)),
         status: flightData.status, // default status.
+        carrier: flightData.carrier,
       });
       return res.status(201).json({
         success: true,

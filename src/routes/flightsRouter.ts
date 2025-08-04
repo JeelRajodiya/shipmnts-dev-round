@@ -56,6 +56,7 @@ router.get("/query", async (req: Request, res: Response) => {
   console.log(req.query);
 
   const flightSchema = z.object({
+    carrier: z.string(),
     start_date: z.string(),
     end_date: z.string(),
   });
@@ -67,6 +68,7 @@ router.get("/query", async (req: Request, res: Response) => {
         $gte: flightData.start_date,
         $lte: flightData.start_date,
       },
+      carrier: flightData.carrier,
     });
 
     if (!FlightRecord) {

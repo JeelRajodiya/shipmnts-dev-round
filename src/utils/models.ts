@@ -71,6 +71,11 @@ const flightSchema = new Schema({
     default: "in-transit",
     required: false,
   },
+  carrier: {
+    type: String,
+    default: "in-transit",
+    required: false,
+  },
 });
 // Export the model with proper typing
 export const User = mongoose.model<IUser>("User", userSchema);
