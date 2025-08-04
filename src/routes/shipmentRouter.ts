@@ -4,9 +4,7 @@ import dbConnect from "../utils/db";
 import z from "zod";
 const router: Router = express.Router();
 // /shipment route
-Array.prototype.insert = function (index, ...items) {
-  this.splice(index, 0, ...items);
-};
+
 router.post("/create", async (req: Request, res: Response) => {
   const body = req.body;
 
@@ -66,14 +64,15 @@ router.post(
       const arrayLen = shipmentRecord.hops.length;
       for (let i = 0; i < arrayLen; i++) {
         if (shipmentRecord.hops[i] === shipmentData.new_hop) {
-          indexOfStartHop = i + 1;
+          indexOfStartHop = i;
           break;
         }
       }
-      const slice1 = shipmentRecord.hops.slice(0, indexOfStartHop);
-      const slice2 = shipmentRecord.hops.slice(indexOfStartHop);
+      console.log(indexOfStartHop);
+      const slice1 = shipmentRecord.hops.slice(0, indexOfStartHop + 1);
+      const slice2 = shipmentRecord.hops.slice(indexOfStartHop + 1);
       console.log(slice1, slice2);
-      shipmentRecord.hops = [...slice2, shipmentData.new_hop, ...slice2];
+      shipmentRecord.hops = [...slice1, shipmentData.new_hop, ...slice2];
       await shipmentRecord.save();
       return res.status(201).json({
         success: true,
